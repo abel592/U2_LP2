@@ -1,0 +1,90 @@
+<form [formGroup]="form"
+      class="example-container"
+      (submit)="operate()"
+      #frmDocente="ngForm">
+
+  <!-- ID oculto -->
+  <div [hidden]="true">
+    <mat-form-field>
+      <input matInput placeholder="ID" formControlName="idDocente">
+    </mat-form-field>
+  </div>
+
+  <!-- Nombre -->
+  <mat-form-field>
+    <input matInput placeholder="Nombre" formControlName="nombres">
+    @if (f['nombres'].errors?.['required'] && f['nombres'].touched) {
+      <small class="invalid">Es requerido</small>
+    }
+    @if (f['nombres'].errors?.['minlength'] && f['nombres'].touched) {
+      <small class="invalid">Mínimo 2 caracteres</small>
+    }
+    @if (f['nombres'].errors?.['maxlength'] && f['nombres'].touched) {
+      <small class="invalid">Máximo 120 caracteres</small>
+    }
+  </mat-form-field>
+
+  <!-- Correo -->
+  <mat-form-field>
+    <input matInput placeholder="Correo" type="email" formControlName="correo">
+    @if (f['correo'].errors?.['required'] && f['correo'].touched) {
+      <small class="invalid">Es requerido</small>
+    }
+    @if (f['correo'].errors?.['email'] && f['correo'].touched) {
+      <small class="invalid">Correo inválido</small>
+    }
+  </mat-form-field>
+
+  <!-- Nivel -->
+  <mat-form-field>
+    <input matInput placeholder="Nivel" formControlName="nivel">
+    @if (f['nivel'].errors?.['required'] && f['nivel'].touched) {
+      <small class="invalid">Es requerido</small>
+    }
+    @if (f['nivel'].errors?.['minlength'] && f['nivel'].touched) {
+      <small class="invalid">Mínimo 2 caracteres</small>
+    }
+    @if (f['nivel'].errors?.['maxlength'] && f['nivel'].touched) {
+      <small class="invalid">Máximo 20 caracteres</small>
+    }
+  </mat-form-field>
+
+  <!-- Usuario -->
+  <mat-form-field>
+    <input matInput placeholder="Usuario" formControlName="usuario">
+    @if (f['usuario'].errors?.['required'] && f['usuario'].touched) {
+      <small class="invalid">Es requerido</small>
+    }
+  </mat-form-field>
+
+  <!-- Contraseña -->
+  <mat-form-field>
+    <input matInput placeholder="Contraseña" type="password" formControlName="contrasena">
+    @if (f['contrasena'].errors?.['required'] && f['contrasena'].touched) {
+      <small class="invalid">Es requerido</small>
+    }
+    @if (f['contrasena'].errors?.['minlength'] && f['contrasena'].touched) {
+      <small class="invalid">Mínimo 6 caracteres</small>
+    }
+  </mat-form-field>
+
+  <!-- Rol -->
+  <mat-form-field>
+    <input matInput placeholder="Rol" formControlName="rol">
+    @if (f['rol'].errors?.['required'] && f['rol'].touched) {
+      <small class="invalid">Es requerido</small>
+    }
+  </mat-form-field>
+
+  <!-- Botones -->
+  <button mat-button type="submit" [disabled]="form.invalid">
+
+    <mat-icon>done</mat-icon>
+    <span>Guardar</span>
+  </button>
+
+  <button mat-button type="button" routerLink="/pages/docente">
+    <mat-icon>cancel</mat-icon>
+    <span>Cancelar</span>
+  </button>
+</form>

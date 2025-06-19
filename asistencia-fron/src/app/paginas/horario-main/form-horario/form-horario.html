@@ -1,0 +1,50 @@
+<form [formGroup]="form"
+      class="example-container"
+      (submit)="operate()"
+      #frmHorario="ngForm">
+
+  <!-- ID oculto -->
+  <div [hidden]="true">
+    <mat-form-field>
+      <input matInput placeholder="ID" formControlName="idHorario">
+    </mat-form-field>
+  </div>
+
+  <!-- Día de la semana -->
+  <mat-form-field>
+    <input matInput placeholder="Día de la semana" formControlName="diaSemana">
+    @if (f['diaSemana'].errors?.['required'] && f['diaSemana'].touched) {
+      <small class="invalid">Es requerido</small>
+    }
+    @if (f['diaSemana'].errors?.['maxlength'] && f['diaSemana'].touched) {
+      <small class="invalid">Máximo 20 caracteres</small>
+    }
+  </mat-form-field>
+
+  <!-- Hora de inicio -->
+  <mat-form-field>
+    <input matInput type="time" placeholder="Hora de inicio" formControlName="horaInicio">
+    @if (f['horaInicio'].errors?.['required'] && f['horaInicio'].touched) {
+      <small class="invalid">Es requerido</small>
+    }
+  </mat-form-field>
+
+  <!-- Hora de fin -->
+  <mat-form-field>
+    <input matInput type="time" placeholder="Hora de fin" formControlName="horaFin">
+    @if (f['horaFin'].errors?.['required'] && f['horaFin'].touched) {
+      <small class="invalid">Es requerido</small>
+    }
+  </mat-form-field>
+
+  <!-- Botones -->
+  <button mat-button type="submit" [disabled]="form.invalid">
+    <mat-icon>done</mat-icon>
+    <span>Guardar</span>
+  </button>
+
+  <button mat-button type="button" routerLink="/pages/horario">
+    <mat-icon>cancel</mat-icon>
+    <span>Cancelar</span>
+  </button>
+</form>

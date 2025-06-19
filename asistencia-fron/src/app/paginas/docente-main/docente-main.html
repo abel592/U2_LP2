@@ -1,0 +1,73 @@
+<router-outlet/>
+
+<mat-form-field class="inputField">
+  <mat-label>Filtrar</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Nombre Docente">
+</mat-form-field>
+
+<div>
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Docente -->
+    <ng-container matColumnDef="idDocente">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let row"> {{row.idDocente}} </td>
+    </ng-container>
+
+    <!-- Nombres -->
+    <ng-container matColumnDef="nombres">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+      <td mat-cell *matCellDef="let row"> {{row.nombres}} </td>
+    </ng-container>
+
+    <!-- Correo -->
+    <ng-container matColumnDef="correo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Correo </th>
+      <td mat-cell *matCellDef="let row"> {{row.correo}} </td>
+    </ng-container>
+
+    <!-- Nivel -->
+    <ng-container matColumnDef="nivel">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nivel </th>
+      <td mat-cell *matCellDef="let row"> {{row.nivel}} </td>
+    </ng-container>
+
+    <!-- Usuario -->
+    <ng-container matColumnDef="usuario">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </th>
+      <td mat-cell *matCellDef="let row"> {{row.usuario}} </td>
+    </ng-container>
+
+    <!-- Rol -->
+    <ng-container matColumnDef="rol">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
+      <td mat-cell *matCellDef="let row"> {{row.rol}} </td>
+    </ng-container>
+
+    <!-- Acciones -->
+    <ng-container matColumnDef="accion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ACCIÓN </th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-button class="no-border" [routerLink]="['edit', row.idDocente]">
+          <mat-icon>mode_edit</mat-icon>
+        </button>
+        <button mat-button class="no-border" (click)="delete(row.idDocente)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="getDisplayedColumns();"></tr>
+    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of docentes">
+  </mat-paginator>
+
+  <button mat-fab color="primary" style="float: right" routerLink="/pages/docente/new">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
